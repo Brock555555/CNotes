@@ -38,7 +38,7 @@ class Binary_Tree{
                 root = new Node{value, nullptr, nullptr};
                 return;
             }
-            new_node = new Node{value, nullptr, nullptr};
+            Node* new_node = new Node{value, nullptr, nullptr};
             std::queue<Node*> q;//need to see all pointers on top down
             q.push(root);
             while(!q.empty()){
