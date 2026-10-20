@@ -139,5 +139,24 @@ class Binary_Tree{
 };
 
 //implement another version where each node is a tree itself
+template<typename T, int N>
+struct Node{//node needs to be seperate
+    T value;
+    std::array<Node*, N> children;//apparently if you do children{} c++ will now default them to null
+
+    Node() : value(T()){//node constructor
+        children.fill(nullptr);
+    }
+};
+
+
+template<typename T, int N>
+class Nary_Tree{
+    private:
+        Node* root;
+
+    public:
+
+};
 
 #endif
