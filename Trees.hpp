@@ -1,6 +1,7 @@
 #ifndef Tree_HPP
 #define Tree_HPP
 #include <queue>
+#include <iostream>
 
 template <typename T>
 class Binary_Tree{
@@ -12,6 +13,42 @@ class Binary_Tree{
         };
 
         Node* root;
+
+        //moved into private to allow function overloading, i.e. so we can call it with the root node
+        void preorder(const Node* t){//performs a preorder traversal of the tree and prints its values
+                    //visits first then goes down subtrees
+                    if(t){
+                        std::cout << t->value << " ";
+                        preorder(t->left);
+                        preorder(t->right);
+                    }
+                    else{
+                        return;
+                    }
+                }
+        
+        void postorder(const Node* t){
+            if(t){
+                postorder(t->left);
+                postorder(t->right);
+                std::cout << t->value << " ";
+            }
+            else{
+                return;
+            }
+        }
+
+        void inorder(const Node* t){
+            if(t){
+                inorder(t->left);
+                std::cout << t->value << " ";
+                inorder(t->right);
+            }
+            else{
+                return;
+            }
+        }
+
     public:
         Binary_Tree(){
             root = nullptr;//default constructor
@@ -60,6 +97,47 @@ class Binary_Tree{
                 }
             }
         }
+
+        //time for traversals
+        //2 main types: depth and breadth
+        //depth has inorder, preorder, postorder
+        //inorder goes down entire left subtree, then root, then right subtree (producing sorted order in bst)
+        //preorder starts with the root, left subtree, then right subtree
+        //post order traverses left, then right, then root
+        void preorder(){//performs a preorder traversal of the tree and prints its values
+            preorder(root);
+            std::cout << std::endl;
+        }
+
+        void postorder(){
+            postorder(root);
+            std::cout << std::endl;
+        }
+
+        void inorder(){
+            inorder(root);
+            std::cout << std::endl;
+        }
+
+        void levelorder(){//is technically breadth first
+            std::queue<Node*> q;
+            if(root){
+                q.push(root);
+                while(!q.empty()){
+                    Node* current = q.front();
+                    q.pop();
+                    std::cout << current->value << " ";
+                    if(current->left){q.push(current->left);}
+                    if(current->right){q.push(current->right);}
+                }
+                std::cout << std::endl;
+            }
+            else{
+                return;
+            }
+        }
 };
+
+//implement another version where each node is a tree itself
 
 #endif
